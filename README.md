@@ -95,8 +95,6 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Project ini juga bisa menggunakan MySQL cloud seperti Aiven, selama kredensial database di `.env` sudah benar.
-
 ### 7. Jalankan migration dan seeder
 
 ```bash
@@ -151,18 +149,6 @@ php artisan migrate:fresh --seed
 npm run dev
 npm run build
 ```
-
-## Catatan Deployment
-
-- Project ini sudah memiliki `Dockerfile` untuk kebutuhan deploy berbasis container
-- Jika deploy ke platform cloud, pastikan `APP_ENV=production` dan `APP_DEBUG=false`
-- Pastikan `APP_KEY`, `APP_URL`, dan seluruh variabel `DB_*` sudah diisi dengan benar
-
-## Catatan Tambahan
-
-- Session default masih menggunakan `file`
-- Cache default masih menggunakan `file`
-- Untuk production, Anda bisa menyesuaikan session, cache, queue, dan storage sesuai kebutuhan server
 
 ## License
 
