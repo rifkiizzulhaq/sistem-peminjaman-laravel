@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Peminjaman Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Peminjaman Laravel adalah aplikasi manajemen peminjaman barang laboratorium berbasis Laravel. Aplikasi ini mendukung alur peminjaman oleh mahasiswa, pengelolaan barang oleh admin, dan pengelolaan data pengguna oleh super admin.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Autentikasi login berbasis Laravel UI
+- Multi role: `SuperAdmin`, `Admin`, dan `mahasiswa`
+- Manajemen data admin dan mahasiswa
+- Manajemen laboratorium dan barang
+- Keranjang peminjaman barang
+- Proses pengajuan, persetujuan, penolakan, dan penyelesaian peminjaman
+- Seeder data awal untuk lab dan akun demo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi yang Digunakan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.1+
+- Laravel 10
+- MySQL
+- Vite
+- Bootstrap
+- JWT Auth
 
-## Learning Laravel
+## Struktur Peran Pengguna
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Super Admin
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Mengelola data admin
+- Mengelola data mahasiswa
+- Melihat dashboard utama
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Admin
 
-## Laravel Sponsors
+- Mengelola data barang
+- Melihat permintaan peminjaman
+- Menyetujui, menolak, dan menyelesaikan peminjaman
+- Melihat data pengembalian
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Mahasiswa
 
-### Premium Partners
+- Melihat daftar lab dan barang
+- Menambahkan barang ke keranjang
+- Checkout peminjaman
+- Melihat riwayat peminjaman
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Cara Setup Setelah Clone
 
-## Contributing
+### 1. Clone repository
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/rifkiizzulhaq/sistem-peminjaman-laravel.git
+cd sistem-peminjaman-laravel
+```
 
-## Code of Conduct
+### 2. Install dependency PHP
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 3. Install dependency frontend
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm install
+```
+
+### 4. Buat file environment
+
+```bash
+cp .env.example .env
+```
+
+Jika menggunakan Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### 5. Generate application key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Atur koneksi database di file `.env`
+
+Sesuaikan bagian berikut:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nama_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Project ini juga bisa menggunakan MySQL cloud seperti Aiven, selama kredensial database di `.env` sudah benar.
+
+### 7. Jalankan migration dan seeder
+
+```bash
+php artisan migrate --seed
+```
+
+Jika ingin mengulang database dari awal:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 8. Jalankan server Laravel
+
+```bash
+php artisan serve
+```
+
+### 9. Jalankan Vite
+
+```bash
+npm run dev
+```
+
+Setelah itu aplikasi bisa diakses di:
+
+- Laravel: `http://127.0.0.1:8000`
+
+## Akun Demo Seeder
+
+Setelah menjalankan `php artisan migrate --seed`, akun berikut akan tersedia:
+
+| Role | Email | Username | Password |
+| --- | --- | --- | --- |
+| SuperAdmin | `SuperAdmin@polindra.ac.id` | `Superadmin` | `123456` |
+| Admin | `Admin@polindra.ac.id` | `Admin` | `123456` |
+| Mahasiswa | `mahasiswa@polindra.ac.id` | `mahasiswa` | `123456` |
+
+Seeder juga membuat data lab awal:
+
+- IOT
+- Robotika
+- Multimedia
+
+## Perintah Penting
+
+```bash
+php artisan serve
+php artisan migrate
+php artisan migrate --seed
+php artisan migrate:fresh --seed
+npm run dev
+npm run build
+```
+
+## Catatan Deployment
+
+- Project ini sudah memiliki `Dockerfile` untuk kebutuhan deploy berbasis container
+- Jika deploy ke platform cloud, pastikan `APP_ENV=production` dan `APP_DEBUG=false`
+- Pastikan `APP_KEY`, `APP_URL`, dan seluruh variabel `DB_*` sudah diisi dengan benar
+
+## Catatan Tambahan
+
+- Session default masih menggunakan `file`
+- Cache default masih menggunakan `file`
+- Untuk production, Anda bisa menyesuaikan session, cache, queue, dan storage sesuai kebutuhan server
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Project ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT).
