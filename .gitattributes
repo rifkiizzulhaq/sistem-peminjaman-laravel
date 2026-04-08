@@ -6,6 +6,11 @@
 *.md diff=markdown
 *.php diff=php
 
+# Linguist tuning for GitHub language stats
+*.blade.php linguist-language=PHP
+public/assets/** linguist-generated=true
+public/build/** linguist-generated=true
+
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
